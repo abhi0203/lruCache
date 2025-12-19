@@ -97,20 +97,16 @@ func (c Cache) Remove() {
 	if c.queue.Head == c.queue.Tail {
 		// Only one item left in the queue
 		fmt.Println("Remove: Only 1 item in the Queue")
+		// Remove the item from hashmap
+		delete(c.hash, c.queue.Tail.Val)
 		c.queue.Head = nil
 		c.queue.Tail = nil
 		c.queue.Length -= 1
-		// Remove the item from hashmap
-		delete(c.hash, c.queue.Tail.Val)
 		fmt.Println("Remove: New Hash Map is ")
 		fmt.Println(c.hash)
 	} else {
 		fmt.Println("Remove: More than 1 items in the queue")
 		current := c.queue.Tail
-		c.queue.Tail = current.Left
-		c.queue.Tail.Right = nil
-		current = nil
-		c.queue.Length -= 1
 		// Remove the item from hashmap
 		if _, exists := c.hash[c.queue.Tail.Val]; exists {
 			delete(c.hash, c.queue.Tail.Val)
@@ -119,6 +115,10 @@ func (c Cache) Remove() {
 		} else {
 			fmt.Println("Remove: Word is not present in the hashmap ", c.queue.Tail.Val)
 		}
+		c.queue.Tail = current.Left
+		c.queue.Tail.Right = nil
+		current = nil
+		c.queue.Length -= 1
 
 	}
 
@@ -173,7 +173,6 @@ func (c Cache) Check(word string) {
 }
 
 func (c Cache) Display() {
-
 	fmt.Println("Time to display the items from the cache.")
 	fmt.Println(c.hash)
 	current := c.queue.Head
@@ -199,9 +198,11 @@ func main() {
 	cache := NewCache(cacheLen)
 	// for _, word := range []string{"Abhiram", "Sara", "Neha", "Alka", "Srivatsa", "Saatvika", "Vedanshi", "Vidhya Ji"}
 	for _, word := range []string{"Abhiram", "Sara", "Neha", "Abhiram", "Alka", "Srivatsa", "Alka", "Saatvika", "Vedanshi", "Vidhya Ji"} {
+		fmt.Println("**********************")
 		fmt.Println("main: Time for cache access.")
 		cache.Check(word)
 		cache.Display()
+		fmt.Println("??????????????????????")
 	}
 }
 
