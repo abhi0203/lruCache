@@ -197,7 +197,7 @@ func main() {
 	}
 	cache := NewCache(cacheLen)
 	// for _, word := range []string{"Abhiram", "Sara", "Neha", "Alka", "Srivatsa", "Saatvika", "Vedanshi", "Vidhya Ji"}
-	for _, word := range []string{"Abhiram", "Sara", "Neha", "Abhiram", "Alka", "Srivatsa", "Alka", "Saatvika", "Vedanshi", "Vidhya Ji"} {
+	for _, word := range []string{"Abhiram", "Sara", "Neha", "Abhiram", "Alka", "Srivatsa", "Alka", "Saatvika", "Vedanshi", "Vidhya"} {
 		fmt.Println("**********************")
 		fmt.Println("main: Time for cache access.")
 		cache.Check(word)
